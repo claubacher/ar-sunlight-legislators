@@ -52,3 +52,15 @@ end
 # print_total('Representative')
 # print_total('Comissioner')
 # print_total('Delegate')
+
+def print_legislator_counts_by_state
+  Legislator.group('state').each do |legislator|
+    state = legislator.state
+    puts "#{state}: " +
+    "#{senators_for(state).count} Senators, " +
+    "#{representatives_for(state).count} Representatives"
+  end
+end
+
+# print_legislator_counts_by_state
+
