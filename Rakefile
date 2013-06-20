@@ -1,6 +1,7 @@
 require 'rake'
 require 'rspec/core/rake_task'
 require_relative 'db/config'
+require_relative 'lib/sunlight_legislators_importer'
 
 
 desc "create the database"
@@ -20,6 +21,11 @@ task "db:migrate" do
   ActiveRecord::Migrator.migrate(ActiveRecord::Migrator.migrations_paths, ENV["VERSION"] ? ENV["VERSION"].to_i : nil) do |migration|
     ENV["SCOPE"].blank? || (ENV["SCOPE"] == migration.scope)
   end
+end
+
+desc "populate the database"
+task "db:populate" do
+  SunlightLegislatorsImporter.import('db/data/legislators.csv')
 end
 
 desc 'Retrieves the current schema version number'
