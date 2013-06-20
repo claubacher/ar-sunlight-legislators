@@ -48,10 +48,6 @@ def print_total(title)
   puts "#{title}s: #{num_legislators}"
 end
 
-# print_total('Senator')
-# print_total('Representative')
-# print_total('Comissioner')
-# print_total('Delegate')
 
 def print_legislator_counts_by_state
   Legislator.group('state').each do |legislator|
@@ -63,4 +59,17 @@ def print_legislator_counts_by_state
 end
 
 # print_legislator_counts_by_state
+
+def delete_inactives
+  Legislator.destroy_all(:in_office => false)
+end
+
+# delete_inactives
+
+# print_total('Senator')
+# print_total('Representative')
+# print_total('Comissioner')
+# print_total('Delegate')
+
+
 
