@@ -29,10 +29,6 @@ def active_legislators(title)
   Legislator.where('title = ? AND in_office = ?', title, true)
 end
 
-# def active_reps
-#   Legislator.where('title = ? AND in_office = ?', 'Rep', true)
-# end
-
 def print_legislator_gender_stats(gender, title)
   actives = active_legislators(title.capitalize[0..2])
   gender_count = actives.where('gender = ?', gender.capitalize[0]).count
@@ -46,3 +42,13 @@ end
 # print_legislator_gender_stats('female', 'Sen')
 # print_legislator_gender_stats('male', 'representative')
 # print_legislator_gender_stats('female', 'Rep')
+
+def print_total(title)
+  num_legislators = Legislator.where('title LIKE ?', "#{title[0]}%").count
+  puts "#{title}s: #{num_legislators}"
+end
+
+# print_total('Senator')
+# print_total('Representative')
+# print_total('Comissioner')
+# print_total('Delegate')
